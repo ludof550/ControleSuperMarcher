@@ -251,6 +251,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         
         cnx = new ConnexionBDD();
         fm = new FonctionsMetier();
+         while(dtmRayons.getRowCount()!=0)
+        {
+            dtmRayons.removeRow(0);
+        }
         for(Secteur s:fm.GetAllSecteurs())
         {
             if(s.getIdSecteur() == Integer.parseInt(tblSecteurs.getValueAt(tblSecteurs.getSelectedRow(), 0).toString()))
@@ -263,33 +267,81 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
             }
         }
+        
+        
     }//GEN-LAST:event_tblSecteursMouseClicked
 
     private void tblRayonsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRayonsMouseClicked
         
+         while(dtmEmployes.getRowCount()!=0)
+        {
+            dtmEmployes.removeRow(0);
+        }
       for(Secteur s:fm.GetAllSecteurs())
         {
             if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
             {
                 for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
                 {
+                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
                     if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
                     {
-                        for(Employe e:fm.)
+                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
+                        {
+                            v.add(t.getUnEmploye().getIdEmploye());
+                            v.add(t.getUnEmploye().getNomEmploye());
+                            v.add(t.getDateTravaillee());
+                            v.add(t.getTempsPasse());
+                        }
                     }
                 }
             }
         }
+      
         
     }//GEN-LAST:event_tblRayonsMouseClicked
 
     private void btnModifierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifierMouseClicked
         
-            
+            if(tblSecteurs.getSelectedRowCount()==0)
+        {
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un secteur");
+        }
+            else if(tblRayons.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un rayon");
+            }
+            else if (tblEmployes.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un employe");
+            }
+            else
+                
+            {
+                
+            }
+                
+                
     }//GEN-LAST:event_btnModifierMouseClicked
 
     private void btnInsererTempsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInsererTempsMouseClicked
-        
+         if(tblSecteurs.getSelectedRowCount()==0)
+        {
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un secteur");
+        }
+            else if(tblRayons.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un rayon");
+            }
+            else if (tblEmployes.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un employe");
+            }
+            else
+                
+            {
+                
+            }
         
     }//GEN-LAST:event_btnInsererTempsMouseClicked
 
