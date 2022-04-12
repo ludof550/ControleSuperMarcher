@@ -18,7 +18,7 @@ package Entity;
             dateTravaillee = uneDate;
             tempsPasse = unTemps;
         }
-
+        
         public Employe getUnEmploye() {
             return unEmploye;
         }

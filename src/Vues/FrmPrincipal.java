@@ -23,6 +23,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     ConnexionBDD cnx;
     FonctionsMetier fm;
     
+    
     DefaultTableModel dtmSecteurs;
     DefaultTableModel dtmRayons;
     DefaultTableModel dtmEmployes;
@@ -223,17 +224,62 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        fm = new FonctionsMetier();
+        cnx = new ConnexionBDD();
+        
+        dtmSecteurs = (DefaultTableModel) tblSecteurs.getModel();
+        Vector v;
+        for(Employe e:fm.GetAllEmployes())
+        {
+            cboEmployes.addItem((e.getNomEmploye()));
+        }
+        for(Secteur s:fm.GetAllSecteurs())
+        {
+            v = new Vector();
+            v.add(s.getIdSecteur());
+            v.add(s.getNomSecteur());
+            
+            dtmSecteurs.addRow(v);
+            
+        }
+        
         
         
     }//GEN-LAST:event_formWindowOpened
 
     private void tblSecteursMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSecteursMouseClicked
-
         
+        cnx = new ConnexionBDD();
+        fm = new FonctionsMetier();
+        for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblSecteurs.getValueAt(tblSecteurs.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    v = new Vector();
+                    v.add(r.getIdRayon());
+                    v.add(r.getNomRayon());
+                }
+            }
+        }
     }//GEN-LAST:event_tblSecteursMouseClicked
 
     private void tblRayonsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRayonsMouseClicked
-
+        
+      for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+                    {
+                        for(Employe e:fm.)
+                    }
+                }
+            }
+        }
         
     }//GEN-LAST:event_tblRayonsMouseClicked
 

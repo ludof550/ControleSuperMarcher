@@ -29,7 +29,7 @@ public class ConnexionBDD
             // chargement du pilote
             Class.forName(pilote);
             // L'objet connexion à la BDD avec le nom de la base, le user et le password
-            cnx = DriverManager.getConnection("jdbc:mysql://localhost/supermarche?serverTimezone="
+            cnx = DriverManager.getConnection("jdbc:mysql://localhost/supermache?serverTimezone="
                     + TimeZone.getDefault().getID(), "root", "");
         }
         catch (ClassNotFoundException ex)
@@ -44,3 +44,4 @@ public class ConnexionBDD
         return cnx;
     }
 }
+
