@@ -222,7 +222,37 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void effacerTblEmplote()
+    {
+         while(dtmEmployes.getRowCount()!=0)
+        {
+            dtmEmployes.removeRow(0);
+        }
+    }
+    public void remplirTblEmploye()
+    {
+        for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
+                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+                    {
+                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
+                        {
+                            v.add(t.getUnEmploye().getIdEmploye());
+                            v.add(t.getUnEmploye().getNomEmploye());
+                            v.add(t.getDateTravaillee());
+                            v.add(t.getTempsPasse());
+                        }
+                    }
+                }
+            }
+        }
+    }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         fm = new FonctionsMetier();
         cnx = new ConnexionBDD();
@@ -273,30 +303,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void tblRayonsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRayonsMouseClicked
         
-         while(dtmEmployes.getRowCount()!=0)
-        {
-            dtmEmployes.removeRow(0);
-        }
-      for(Secteur s:fm.GetAllSecteurs())
-        {
-            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
-            {
-                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
-                {
-                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
-                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
-                    {
-                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
-                        {
-                            v.add(t.getUnEmploye().getIdEmploye());
-                            v.add(t.getUnEmploye().getNomEmploye());
-                            v.add(t.getDateTravaillee());
-                            v.add(t.getTempsPasse());
-                        }
-                    }
-                }
-            }
-        }
+         effacerTblEmplote();
+     remplirTblEmploye();
       
         
     }//GEN-LAST:event_tblRayonsMouseClicked
@@ -336,30 +344,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         }
             }
-             while(dtmEmployes.getRowCount()!=0)
-        {
-            dtmEmployes.removeRow(0);
-        }
-             for(Secteur s:fm.GetAllSecteurs())
-        {
-            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
-            {
-                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
-                {
-                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
-                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
-                    {
-                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
-                        {
-                            v.add(t.getUnEmploye().getIdEmploye());
-                            v.add(t.getUnEmploye().getNomEmploye());
-                            v.add(t.getDateTravaillee());
-                            v.add(t.getTempsPasse());
-                        }
-                    }
-                }
-            }
-        }
+            effacerTblEmplote();
+            remplirTblEmploye();
                 
                 
     }//GEN-LAST:event_btnModifierMouseClicked
@@ -415,30 +401,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
             }
             }
-          while(dtmEmployes.getRowCount()!=0)
-        {
-            dtmEmployes.removeRow(0);
-        }
-          for(Secteur s:fm.GetAllSecteurs())
-        {
-            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
-            {
-                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
-                {
-                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
-                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
-                    {
-                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
-                        {
-                            v.add(t.getUnEmploye().getIdEmploye());
-                            v.add(t.getUnEmploye().getNomEmploye());
-                            v.add(t.getDateTravaillee());
-                            v.add(t.getTempsPasse());
-                        }
-                    }
-                }
-            }
-        }
+          effacerTblEmplote();
+          remplirTblEmploye();
+          
         
     }//GEN-LAST:event_btnInsererTempsMouseClicked
 
