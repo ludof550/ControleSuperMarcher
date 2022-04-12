@@ -318,8 +318,48 @@ public class FrmPrincipal extends javax.swing.JFrame {
             else
                 
             {
-                
+                for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
+                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+                    {
+                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
+                        {
+                            fm.ModifierTemps(t.getUnEmploye().getIdEmploye(), r.getIdRayon(), uneDate, Integer.parseInt(txtNouveauTemps.getText()));
+                        }
+                    }
+                }
             }
+        }
+            }
+             while(dtmEmployes.getRowCount()!=0)
+        {
+            dtmEmployes.removeRow(0);
+        }
+             for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
+                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+                    {
+                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
+                        {
+                            v.add(t.getUnEmploye().getIdEmploye());
+                            v.add(t.getUnEmploye().getNomEmploye());
+                            v.add(t.getDateTravaillee());
+                            v.add(t.getTempsPasse());
+                        }
+                    }
+                }
+            }
+        }
                 
                 
     }//GEN-LAST:event_btnModifierMouseClicked
@@ -341,7 +381,64 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 
             {
                 
+            if(tblSecteurs.getSelectedRowCount()==0)
+        {
+            JOptionPane.showMessageDialog(this, "Veuillez saisir un secteur");
+        }
+            else if(tblRayons.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un rayon");
             }
+            else if (tblEmployes.getSelectedRowCount()==0)
+            {
+                JOptionPane.showMessageDialog(this, "Veuillez saisir un employe");
+            }
+            else
+                
+            {
+                for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
+                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+                    {
+                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
+                        {
+                            fm.InsererTemps(t.getUnEmploye().getIdEmploye(), r.getIdRayon(), Integer.parseInt(txtNouveauTemps.getText()));
+                        }
+                    }
+                }
+            }
+        }
+            }
+            }
+          while(dtmEmployes.getRowCount()!=0)
+        {
+            dtmEmployes.removeRow(0);
+        }
+          for(Secteur s:fm.GetAllSecteurs())
+        {
+            if(s.getIdSecteur() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+            {
+                for(Rayon r:fm.GetAllRayonsByIdsecteur(s.getIdSecteur()))
+                {
+                    txtTotalHeuresRayon.setText(String.valueOf(fm.TotalHeuresRayon(r.getIdRayon())));
+                    if(r.getIdRayon() == Integer.parseInt(tblRayons.getValueAt(tblRayons.getSelectedRow(), 0).toString()))
+                    {
+                        for(Travailler t:fm.GetAllTravailler(r.getIdRayon()))
+                        {
+                            v.add(t.getUnEmploye().getIdEmploye());
+                            v.add(t.getUnEmploye().getNomEmploye());
+                            v.add(t.getDateTravaillee());
+                            v.add(t.getTempsPasse());
+                        }
+                    }
+                }
+            }
+        }
         
     }//GEN-LAST:event_btnInsererTempsMouseClicked
 
