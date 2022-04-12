@@ -28,6 +28,7 @@ public class FonctionsMetier
     private PreparedStatement ps;
     private ResultSet rs;
     private Connection cnx;
+    private String DateTimeFormatter;
 
     public FonctionsMetier()
     {
@@ -206,11 +207,43 @@ public class FonctionsMetier
     
     public void ModifierTemps(int codeEmploye, int CodeRayon, String uneDate,int nouveauTemps)
     {
+        int heure = 0;
+         
+        try {
+            
+             ps = cnx.prepareStatement("Update travailler set temp "+nouveauTemps+"where codeE = "+codeEmploye+"and date ="+uneDate);
+            // On execute notre rqt
+            ps.executeUpdate();
+            
+            
+            //on parcours le RésultSet
+            //TANT QU' IL Y A DES ENREGISTREMENT (lignes)
+            
+              
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }
     
+    
     public void InsererTemps(int codeEmploye, int CodeRayon,int nouveauTemps)
     {
+       
+         
+        try {
+            
+             ps = cnx.prepareStatement("Insert into travailler(codeE,codeR,date,temp)values("+codeEmploye+","+CodeRayon+","+DateTimeFormatter+","+ nouveauTemps+")");
+            // On execute notre rqt
+            ps.executeUpdate();
+            
+   
+        } catch (SQLException ex) {
+            Logger.getLogger(FonctionsMetier.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+        
+    
     }
 }
